@@ -192,10 +192,20 @@ All functionality verified in production.
 
 ---
 
+
+
+## AI Agent Mistake and Fix
+
+During development, the AI agent initially handled profile creation only through the application signup flow. This led to a situation where an authentication user could be created successfully, but the corresponding profile record was not always created. As a result, bookmark creation failed due to a foreign key constraint because bookmarks reference profile records.
+
+I investigated the issue by tracing the signup and bookmark creation flow, identifying that profile creation was not guaranteed. To fix this, I implemented a Supabase database trigger that automatically creates a profile whenever a new authentication user is created. I also added a recovery flow for users who might be missing a profile record. After these changes, signup, profile creation, and bookmark CRUD operations worked reliably in both local and production environments.
+
+## What I Would Improve With More Time
+
+With more time, I would enhance the application by adding bookmark tags, search and filtering capabilities, bookmark categories, and a richer public profile experience. I would also complete full email onboarding with Resend, add automated testing, improve UI polish, and introduce analytics to better understand user activity and engagement.
+
 ## Author
 
 Jitendra Singh
-
-Software Engineering Intern
 
 Java | Spring Boot | React | Next.js | PostgreSQL | Supabase
